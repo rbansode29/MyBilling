@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>Customer List</title>
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+	th:href="@{/webjars/jquery/2.1.4/jquery.min.css}"></script>
+
+<link href="../static/css/spring-core.css"
+	th:href="@{css/spring-core.css}" rel="stylesheet" media="screen" />
+</head>
+<body>
+	<div class="container">
+		<h2>Customer List</h2>
+		<table class="table table-striped">
+			<div th:if="${not #lists.isEmpty(customers)}">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Contact Number</th>
+					<th>Detail</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr th:each="customer : ${customers}">
+					<td th:text="${customer.id}"></td>
+					<td th:text="${customer.name}"></td>
+					<td th:text="${customer.address}"></td>
+					<td th:text="${customer.contact}"></td>
+					<td><a th:href="${'/customer/'+ customer.id}">View</a></td>
+					<td><a th:href="${'/customer/edit/'+ customer.id}">Edit</a></td>
+					<td><a th:href="${'/customer/delete/'+ customer.id}">Delete</a></td>
+				</tr>
+			</div>
+			<tr>
+				<td><a th:href="${'/customer/new'}">Add New Customer</a></td>
+				<td><a th:href="${'/customer/homePage'}">Back to Home</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
